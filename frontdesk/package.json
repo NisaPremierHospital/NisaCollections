@@ -6,6 +6,7 @@
     "apollo-boost": "^0.1.14",
     "codemirror-graphql": "^0.6.12",
     "graphiql": "^0.11.11",
+    "graphiql-material-theme": "^1.0.3",
     "graphql": "^0.13.2",
     "react": "^16.4.2",
     "react-apollo": "^2.1.11",

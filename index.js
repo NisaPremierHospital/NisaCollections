@@ -8,6 +8,7 @@ var  MongoClient = require('mongodb').MongoClient;
 // var mongoose = require('mongoose');
 var cors = require('cors');
 var bodyParser = require('body-parser');
+const path = require("path");
 
 import expressGraphql from "express-graphql";
 import resolvers from "./graphQL/resolver";
@@ -51,7 +52,13 @@ app.use(
     })
   );
 
-app.get('/', (req, res) => res.render('index', { title: 'Hey', message: 'Hello there!' }))
+app.get('/collection', (req, res) => res.render('index', { title: 'Hey', message: 'Hello there!' }))
+
+app.use(express.static(path.join(__dirname, 'frontdesk/build')));
+
+app.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname, 'frontdesk/build', 'index.html'));
+});
 
 // server.applyMiddleware({ app }); // app is from an existing express app
 
@@ -83,7 +90,7 @@ app.post('/exportToExcel', (req, res) => {
           if(result && result.data && result.data.allNisaCollections && 
                 result.data.allNisaCollections && result.data.allNisaCollections.NisaCollections && 
                 !result.data.allNisaCollections.NisaCollections.length){
-              return res.send("Not Ok");
+              return res.status(400).send("Not Ok");
           }
           const data = result.data.allNisaCollections.NisaCollections
           let excelHeaders = Object.keys(data[0]).map( (item, index, array) => {
@@ -112,14 +119,15 @@ app.post('/exportToExcel', (req, res) => {
             res.writeHead(200, {
             'Content-Disposition': `attachment;filename=${options.fileName}.xlsx`,
             'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'Access-Control-Expose-Headers': 'Content-Disposition' 
             });
             stream.pipe(res);
           }).catch((err)=>{
-              res.send("Failure generating the file");
+              res.status(400).send("Failure generating the file");
           })
     }).catch( (err) => {
         console.log(err)
-        res.send(err);
+        res.status(400).send(err);
     });
 });
 
@@ -188,11 +196,11 @@ app.get('/exportToExcelSandbox', (req, res) => {
             });
             stream.pipe(res);
           }).catch((err)=>{
-              res.send("Failure generating the file");
+              res.status(400).send("Failure generating the file");
           })
     }).catch( (err) => {
         console.log(err)
-        res.send(err);
+        res.status(400).send(err);
     });
 });
 

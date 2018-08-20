@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 // import { ApolloProvider } from "react-apollo";
 import logo from './logo.png';
 import './App.css';
-// import GraphiQL from 'graphiql';
+import GraphiQL from 'graphiql';
 
-import GraphiQL from './graphiql/src';
+// import GraphiQL from './graphiql/src';
 
 import fetch from 'isomorphic-fetch';
+import 'graphiql-material-theme'
+import defaultQuery from './defaultQuery'
 
 // import '../node_modules/graphiql/graphiql.css';
 
@@ -19,7 +21,7 @@ import fetch from 'isomorphic-fetch';
 // });
 
 function graphQLFetcher(graphQLParams) {
-  return fetch('http://graphql:9000/graphql', {
+  return fetch(process.env.REACT_APP_GRAPHQL + '/graphql', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(graphQLParams),
@@ -30,63 +32,102 @@ function graphQLFetcher(graphQLParams) {
 
 class App extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      // REQUIRED:
+      // `fetcher` must be provided in order for GraphiQL to operate
+      fetcher: graphQLFetcher,
+
+      // OPTIONAL PARAMETERS
+      // GraphQL artifacts
+      query: defaultQuery,
+      variables: '',
+      response: '',
+
+      editorTheme: "material",
+
+      // GraphQL Schema
+      // If `undefined` is provided, an introspection query is executed
+      // using the fetcher.
+      schema: undefined,
+
+      // Useful to determine which operation to run
+      // when there are multiple of them.
+      operationName: null,
+      storage: null,
+      defaultQuery: defaultQuery,
+
+      // Custom Event Handlers
+      onEditQuery: null,
+      onEditVariables: null,
+      onEditOperationName: null,
+
+      // GraphiQL automatically fills in leaf nodes when the query
+      // does not provide them. Change this if your GraphQL Definitions
+      // should behave differently than what's defined here:
+      // (https://github.com/graphql/graphiql/blob/master/src/utility/fillLeafs.js#L75)
+      getDefaultFieldNames: null
+    };
+  }
+
   handleClickExportButton(event) {
     const editor = this.graphiql.getQueryEditor();
+    console.log("another thing");
     const currentText = editor.getValue();
     const { parse, print } = require('graphql');
     const prettyText = print(parse(currentText));
     console.log("ServerConsumer", prettyText);
   }
 
-  componentDidMount(){
-    // const editor = this.graphiql.getQueryEditor();
-    let query = `
-    # Welcome to GraphiQL
-    #
-    # GraphiQL is an in-browser tool for writing, validating, and
-    # testing GraphQL queries.
-    #
-    # Type queries into this side of the screen, and you will see intelligent
-    # typeaheads aware of the current GraphQL type schema and live syntax and
-    # validation errors highlighted within the text.
-    #
-    # GraphQL queries typically start with a "{" character. Lines that starts
-    # with a # are ignored.
-    #
-    # An example GraphQL query might look like:
-    #
-    #     {
-    #       field(arg: "value") {
-    #         subField
-    #       }
-    #     }
-    #
-    # Keyboard shortcuts:
-    #
-    #  Prettify Query:  Shift-Ctrl-P (or press the prettify button above)
-    #
-    #       Run Query:  Ctrl-Enter (or press the play button above)
-    #
-    #   Auto Complete:  Ctrl-Space (or just start typing)
-    #
-    `;
-    console.log(query);
-    // editor.setValue(query);
-  }
-
-
   render() {
     return (
-      <GraphiQL fetcher={graphQLFetcher}>
+      <GraphiQL ref={c => { this.graphiql = c; }} {...this.state}>
+      
       <GraphiQL.Logo>
-        <img src={logo} className="Nisa Premier" alt="logo" />
+        <img src={logo} height="40" className="Nisa Premier" alt="logo" />
       </GraphiQL.Logo>
       
       <GraphiQL.Toolbar>
 
           <GraphiQL.Button
-            onClick={this.handleClickExportButton}
-            label="ExportToExcel"
+            onClick={ (e ) => {
+              console.log("insider threat");
+              const editor = this.graphiql.getQueryEditor();
+              console.log("another thing");
+              const currentText = editor.getValue();
+              const { parse, print } = require('graphql');
+              try{
+                const prettyText = print(parse(currentText));
+                fetch(process.env.GRAPHQL + '/exportToExcel', { //http://graphql:9000/
+                  method: 'post',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({code: prettyText})
+                })
+                .then(async response => ({
+                  fileName: response.headers.get('content-disposition').split('filename=')[1],
+                  blob: await response.blob()
+                }))
+                .then(({ fileName, blob }) => {
+                  const url = window.URL.createObjectURL(blob);
+                  const a = document.createElement("a");
+                  document.body.appendChild(a);
+                  a.style = "display: none";
+                  a.href = url;
+                  a.download = fileName;
+                  a.click();
+                  window.URL.revokeObjectURL(url);
+                })
+                .catch((err)=>{
+                  console.log(err);
+                  alert("Server could not process your request");
+                });
+              } catch(error) {
+                console.log(error);
+                alert("Invalid Syntax");
+              }
+            }}
+            label="Export To Excel"
             title="Export to Excel"
           />
 
@@ -96,6 +137,5 @@ class App extends Component {
     );
   }
 }
-
 
 export default App;
