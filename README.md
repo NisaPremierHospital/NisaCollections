@@ -11,6 +11,7 @@ db.nisa_collection.createIndex({labtests_config_name: -1});
 db.nisa_collection.createIndex({radiology_scan_name: -1});
 db.nisa_collection.createIndex({patient_first_name: -1});
 db.nisa_collection.createIndex({patient_last_name: -1});
+db.nisa_collection.createIndex({record_date: 1});
 
 ## Error Correction
 
@@ -63,3 +64,7 @@ db.nisa_collection.find({report_type: "vital sign"}).snapshot().forEach(function
     db.nisa_collection.save(e); 
 });
 
+
+
+## UI
+ browserify codemirror.js -o public/bundle.js -t [ babelify --presets [ "@babel/preset-env"] ]

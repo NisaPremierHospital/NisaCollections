@@ -24,7 +24,7 @@ export default {
       __isDate: true,
       format: "%m/%d/%Y"
     },
-    record_type: "String",
+    report_type: "String",
     encounter_id: "Int",
     service_center: "String",
     hospital_id: "Int",

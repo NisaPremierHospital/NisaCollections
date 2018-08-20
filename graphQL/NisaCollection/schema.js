@@ -20,7 +20,7 @@ export const type = `
     patient_is_deceased: Boolean
     patient_is_active: Boolean
     record_date: String
-    record_type: String
+    report_type: String
     encounter_id: Int
     service_center: String
     hospital_id: Int
@@ -160,7 +160,7 @@ export const type = `
     patient_is_deceased: Boolean
     patient_is_active: Boolean
     record_date: String
-    record_type: String
+    report_type: String
     encounter_id: Int
     service_center: String
     hospital_id: Int
@@ -280,7 +280,7 @@ export const type = `
     patient_is_deceased: Boolean
     patient_is_active: Boolean
     record_date: String
-    record_type: String
+    report_type: String
     encounter_id: Int
     encounter_id_INC: Int
     encounter_id_DEC: Int
@@ -429,7 +429,7 @@ export const type = `
     patient_is_deceased: Int
     patient_is_active: Int
     record_date: Int
-    record_type: Int
+    report_type: Int
     encounter_id: Int
     service_center: Int
     hospital_id: Int
@@ -650,13 +650,13 @@ export const type = `
     record_date: String
     record_date_ne: String
     record_date_in: [String]
-    record_type_contains: String
-    record_type_startsWith: String
-    record_type_endsWith: String
-    record_type_regex: String
-    record_type: String
-    record_type_ne: String
-    record_type_in: [String]
+    report_type_contains: String
+    report_type_startsWith: String
+    report_type_endsWith: String
+    report_type_regex: String
+    report_type: String
+    report_type_ne: String
+    report_type_in: [String]
     encounter_id_lt: Int
     encounter_id_lte: Int
     encounter_id_gt: Int
@@ -1460,13 +1460,13 @@ export const query = `
     record_date: String,
     record_date_ne: String,
     record_date_in: [String],
-    record_type_contains: String,
-    record_type_startsWith: String,
-    record_type_endsWith: String,
-    record_type_regex: String,
-    record_type: String,
-    record_type_ne: String,
-    record_type_in: [String],
+    report_type_contains: String,
+    report_type_startsWith: String,
+    report_type_endsWith: String,
+    report_type_regex: String,
+    report_type: String,
+    report_type_ne: String,
+    report_type_in: [String],
     encounter_id_lt: Int,
     encounter_id_lte: Int,
     encounter_id_gt: Int,
