@@ -120,6 +120,45 @@ class App extends Component {
             title="Export to Excel"
           />
 
+          <GraphiQL.Button
+            onClick={ (e ) => {
+              const editor = this.graphiql.getQueryEditor();
+              const currentText = editor.getValue();
+              const { parse, print } = require('graphql');
+              try{
+                const prettyText = print(parse(currentText));
+                fetch(process.env.REACT_APP_GRAPHQL + '/exportToCSV', { //http://graphql:9000/
+                  method: 'post',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({code: prettyText})
+                })
+                .then(async response => ({
+                  fileName: response.headers.get('content-disposition').split('filename=')[1],
+                  blob: await response.blob()
+                }))
+                .then(({ fileName, blob }) => {
+                  const url = window.URL.createObjectURL(blob);
+                  const a = document.createElement("a");
+                  document.body.appendChild(a);
+                  a.style = "display: none";
+                  a.href = url;
+                  a.download = fileName;
+                  a.click();
+                  window.URL.revokeObjectURL(url);
+                })
+                .catch((err)=>{
+                  console.log(err);
+                  alert("Server could not process your request");
+                });
+              } catch(error) {
+                console.log(error);
+                alert("Invalid Syntax");
+              }
+            }}
+            label="Export To CSV"
+            title="Export to CSV"
+          />
+
         </GraphiQL.Toolbar>
 
       </GraphiQL>
