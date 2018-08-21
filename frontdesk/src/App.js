@@ -71,15 +71,6 @@ class App extends Component {
     };
   }
 
-  handleClickExportButton(event) {
-    const editor = this.graphiql.getQueryEditor();
-    console.log("another thing");
-    const currentText = editor.getValue();
-    const { parse, print } = require('graphql');
-    const prettyText = print(parse(currentText));
-    console.log("ServerConsumer", prettyText);
-  }
-
   render() {
     return (
       <GraphiQL ref={c => { this.graphiql = c; }} {...this.state}>
@@ -92,14 +83,12 @@ class App extends Component {
 
           <GraphiQL.Button
             onClick={ (e ) => {
-              console.log("insider threat");
               const editor = this.graphiql.getQueryEditor();
-              console.log("another thing");
               const currentText = editor.getValue();
               const { parse, print } = require('graphql');
               try{
                 const prettyText = print(parse(currentText));
-                fetch(process.env.GRAPHQL + '/exportToExcel', { //http://graphql:9000/
+                fetch(process.env.REACT_APP_GRAPHQL + '/exportToExcel', { //http://graphql:9000/
                   method: 'post',
                   headers: { 'Content-Type': 'application/json' },
                   body: JSON.stringify({code: prettyText})
