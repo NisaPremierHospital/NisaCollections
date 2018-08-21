@@ -19,6 +19,7 @@ export const type = `
     patient_address: String
     patient_is_deceased: Boolean
     patient_is_active: Boolean
+    creation_date: String
     record_date: String
     report_type: String
     encounter_id: Int
@@ -159,6 +160,7 @@ export const type = `
     patient_address: String
     patient_is_deceased: Boolean
     patient_is_active: Boolean
+    creation_date: String
     record_date: String
     report_type: String
     encounter_id: Int
@@ -279,6 +281,7 @@ export const type = `
     patient_address: String
     patient_is_deceased: Boolean
     patient_is_active: Boolean
+    creation_date: String
     record_date: String
     report_type: String
     encounter_id: Int
@@ -428,6 +431,7 @@ export const type = `
     patient_address: Int
     patient_is_deceased: Int
     patient_is_active: Int
+    creation_date: Int
     record_date: Int
     report_type: Int
     encounter_id: Int
@@ -643,6 +647,13 @@ export const type = `
     patient_is_active: Boolean
     patient_is_active_ne: Boolean
     patient_is_active_in: [Boolean]
+    creation_date_contains: String
+    creation_date_startsWith: String
+    creation_date_endsWith: String
+    creation_date_regex: String
+    creation_date: String
+    creation_date_ne: String
+    creation_date_in: [String]
     record_date_lt: String
     record_date_lte: String
     record_date_gt: String
@@ -1453,6 +1464,13 @@ export const query = `
     patient_is_active: Boolean,
     patient_is_active_ne: Boolean,
     patient_is_active_in: [Boolean],
+    creation_date_contains: String,
+    creation_date_startsWith: String,
+    creation_date_endsWith: String,
+    creation_date_regex: String,
+    creation_date: String,
+    creation_date_ne: String,
+    creation_date_in: [String],
     record_date_lt: String,
     record_date_lte: String,
     record_date_gt: String,

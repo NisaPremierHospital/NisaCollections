@@ -38,6 +38,7 @@ const NisaCollection = {
     patient_is_deceased: BoolType,
     patient_is_active: BoolType,
 
+    creation_date: StringType, //index
     record_date: DateType, //Strict
     report_type: StringType, //index
     encounter_id: IntType,

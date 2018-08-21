@@ -20,6 +20,7 @@ export default {
     patient_address: "String",
     patient_is_deceased: "Boolean",
     patient_is_active: "Boolean",
+    creation_date: "String",
     record_date: {
       __isDate: true,
       format: "%m/%d/%Y"
