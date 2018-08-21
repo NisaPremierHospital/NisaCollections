@@ -62,56 +62,14 @@ db.nisa_collection.createIndex({vital_sign_value: -1});
 
 ## Error Correction
 
-### Lab
-db.nisa_collection.find({report_type: "lab"}).snapshot().forEach(function (e) {
-    e.record_date = new Date(e.lab__patient_labs_specimen_date); 
-    e.emr_id = e.lab__patient_labs_patient_id; 
+### All (Repeatedly only there's no record left)
+db.nisa_collection.find({record_date: { $eq: null}}).limit(100000).snapshot().forEach(function (e) {
+    e.record_date = new Date(e.creation_date); 
     db.nisa_collection.save(e); 
 });
-
-### PatientDiagnosis
-db.nisa_collection.find({report_type: "diagnosis"}).snapshot().forEach(function (e) {
-    e.record_date = new Date(e.patient_diagnoses_date_of_entry); 
-    db.nisa_collection.save(e); 
-});
-
-### PatientProcedureNote
-db.nisa_collection.find({report_type: "procedure note"}).snapshot().forEach(function (e) {
-    e.record_date = new Date(e.patient_procedure_request_date); 
-    db.nisa_collection.save(e); 
-});
-
-### Regimens
-db.nisa_collection.find({report_type: "pharmacy"}).snapshot().forEach(function (e) {
-    e.record_date = new Date(e.regimen_request_time); 
-    db.nisa_collection.save(e); 
-});
-
-### Scan
-db.nisa_collection.find({report_type: "imaging"}).snapshot().forEach(function (e) {
-    e.record_date = new Date(e.radiology_request_date); 
-    db.nisa_collection.save(e); 
-});
-
-### Scan
-db.nisa_collection.find({report_type: "consultation"}).snapshot().forEach(function (e) {
-    e.record_date = new Date(e.consultation_date_of_entry); 
-    db.nisa_collection.save(e); 
-});
-
-### Nursing Task
-db.nisa_collection.find({report_type: "procedure nursing task"}).snapshot().forEach(function (e) {
-    e.record_date = new Date(e.patient_procedure_request_date); 
-    db.nisa_collection.save(e); 
-});
-
-### Vitals
-db.nisa_collection.find({report_type: "vital sign"}).snapshot().forEach(function (e) {
-    e.record_date = new Date(e.vital_sign_read_date); 
-    db.nisa_collection.save(e); 
-});
-
 
 
 ## UI
  browserify codemirror.js -o public/bundle.js -t [ babelify --presets [ "@babel/preset-env"] ]
+
+

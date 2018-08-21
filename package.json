@@ -40,6 +40,7 @@
     "is-symbol": "^1.0.1",
     "isarray": "^0.0.1",
     "iterall": "^1.2.2",
+    "json2csv": "^4.2.1",
     "lodash": "^4.17.10",
     "long": "^4.0.0",
     "markdown-it": "^8.4.2",
