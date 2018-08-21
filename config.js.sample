@@ -1,0 +1,8 @@
+module.exports = {
+    mongodb: {
+        dbn: 'mongodb://localhost:27017',
+        host: 'localhost',
+        db: 'nisa_main',
+        db_test: 'nisa_test',
+    },
+}
