@@ -5,12 +5,12 @@ run..
 rm -R graphQL
 npm run build
 npm start
-``
+```
 
 ## Increase Performance 
 
 ### Keys To Index
-
+```sh
 db.nisa_collection.createIndex({emr_id: -1})
 db.nisa_collection.createIndex({patient_first_name: -1})
 db.nisa_collection.createIndex({patient_last_name: -1})
@@ -68,17 +68,20 @@ db.nisa_collection.createIndex({patient_procedure_nursing_task_id: -1});
 //
 db.nisa_collection.createIndex({vital_sign_type: -1});
 db.nisa_collection.createIndex({vital_sign_value: -1});
-
+```
 ## Error Correction
 
 ### All (Repeatedly only there's no record left)
+```sh
 db.nisa_collection.find({record_date: { $eq: null}}).limit(100000).snapshot().forEach(function (e) {
     e.record_date = new Date(e.creation_date); 
     db.nisa_collection.save(e); 
 });
-
+```
 
 ## UI
+```sh
  browserify codemirror.js -o public/bundle.js -t [ babelify --presets [ "@babel/preset-env"] ]
+```
 
 
