@@ -71,7 +71,7 @@ db.nisa_collection.createIndex({vital_sign_value: -1});
 ```
 ## Error Correction
 
-### All (Repeatedly only there's no record left)
+### All (Do it until there's no record left)
 ```sh
 db.nisa_collection.find({record_date: { $eq: null}}).limit(100000).snapshot().forEach(function (e) {
     e.record_date = new Date(e.creation_date); 
