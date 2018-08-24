@@ -150,7 +150,8 @@ const NisaCollection = {
     vital_sign_value: StringType, //FloatType
     vital_sign_unit: StringType,
     vital_sign_min_val: StringType, //FloatType
-    vital_sign_read_date: StringType //DateType
+    vital_sign_read_date: StringType, //DateType
+    hba1c_fbs: StringArrayType,
   }
 };
 

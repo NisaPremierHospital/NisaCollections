@@ -119,6 +119,7 @@ export default {
     vital_sign_value: "String",
     vital_sign_unit: "String",
     vital_sign_min_val: "String",
-    vital_sign_read_date: "String"
+    vital_sign_read_date: "String",
+    hba1c_fbs: "StringArray"
   }
 };

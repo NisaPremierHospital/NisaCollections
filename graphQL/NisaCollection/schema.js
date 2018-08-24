@@ -116,6 +116,7 @@ export const type = `
     vital_sign_unit: String
     vital_sign_min_val: String
     vital_sign_read_date: String
+    hba1c_fbs: [String]
   }
 
   type NisaCollectionQueryResults {
@@ -257,6 +258,7 @@ export const type = `
     vital_sign_unit: String
     vital_sign_min_val: String
     vital_sign_read_date: String
+    hba1c_fbs: [String]
   }
 
   input NisaCollectionMutationInput {
@@ -410,6 +412,13 @@ export const type = `
     vital_sign_unit: String
     vital_sign_min_val: String
     vital_sign_read_date: String
+    hba1c_fbs: [String]
+    hba1c_fbs_PUSH: String
+    hba1c_fbs_CONCAT: [String]
+    hba1c_fbs_UPDATE: StringArrayUpdate
+    hba1c_fbs_UPDATES: [StringArrayUpdate]
+    hba1c_fbs_PULL: [String]
+    hba1c_fbs_ADDTOSET: [String]
   }
 
   input NisaCollectionSort {
@@ -528,6 +537,7 @@ export const type = `
     vital_sign_unit: Int
     vital_sign_min_val: Int
     vital_sign_read_date: Int
+    hba1c_fbs: Int
   }
 
   input NisaCollectionFilters {
@@ -1311,6 +1321,16 @@ export const type = `
     vital_sign_read_date: String
     vital_sign_read_date_ne: String
     vital_sign_read_date_in: [String]
+    hba1c_fbs_count: Int
+    hba1c_fbs_textContains: String
+    hba1c_fbs_startsWith: String
+    hba1c_fbs_endsWith: String
+    hba1c_fbs_regex: String
+    hba1c_fbs: [String]
+    hba1c_fbs_in: [[String]]
+    hba1c_fbs_contains: String
+    hba1c_fbs_containsAny: [String]
+    hba1c_fbs_ne: [String]
     OR: [NisaCollectionFilters]
   }
   
@@ -2128,6 +2148,16 @@ export const query = `
     vital_sign_read_date: String,
     vital_sign_read_date_ne: String,
     vital_sign_read_date_in: [String],
+    hba1c_fbs_count: Int,
+    hba1c_fbs_textContains: String,
+    hba1c_fbs_startsWith: String,
+    hba1c_fbs_endsWith: String,
+    hba1c_fbs_regex: String,
+    hba1c_fbs: [String],
+    hba1c_fbs_in: [[String]],
+    hba1c_fbs_contains: String,
+    hba1c_fbs_containsAny: [String],
+    hba1c_fbs_ne: [String],
     OR: [NisaCollectionFilters],
     SORT: NisaCollectionSort,
     SORTS: [NisaCollectionSort],

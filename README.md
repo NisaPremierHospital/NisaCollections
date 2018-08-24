@@ -1,3 +1,12 @@
+## Getting Started
+Update the schema here ./mgsSetup.js
+run..
+```sh
+rm -R graphQL
+npm run build
+npm start
+``
+
 ## Increase Performance 
 
 ### Keys To Index
