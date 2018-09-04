@@ -120,6 +120,27 @@ export default {
     vital_sign_unit: "String",
     vital_sign_min_val: "String",
     vital_sign_read_date: "String",
-    hba1c_fbs: "StringArray"
+    hba1c_fbs: "StringArray",
+    encounter_specialization_id: "Int",
+    specialization_billing_code: "String",
+    specialization_staff_type: "String",
+    encounter_department_id: "Int",
+    department_title: "String",
+    cost_centre_name: "String",
+    cost_centre_description: "String",
+    cost_centre_analytical_code: "String",
+    encounter_initiator_id: "Int",
+    encounter_start_date: "String",
+    encounter_follow_up: "String",
+    encounter_claimed: "Int",
+    encounter_open: "Int",
+    encounter_signed_by: "Int",
+    encounter_signed_on: "String",
+    encounter_triaged_on: "String",
+    encounter_triaged_by: "Int",
+    encounter_scheme_id: "Int",
+    encounter_canceled: "Int",
+    encounter_bill_line_id: "Int",
+    encounter_referral_id: "Int"
   }
 };

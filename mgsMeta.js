@@ -152,6 +152,29 @@ const NisaCollection = {
     vital_sign_min_val: StringType, //FloatType
     vital_sign_read_date: StringType, //DateType
     hba1c_fbs: StringArrayType,
+
+    //Encounter
+    encounter_specialization_id: IntType,
+    specialization_billing_code: StringType,
+    specialization_staff_type: StringType,
+    encounter_department_id: IntType,
+    department_title: StringType,
+    cost_centre_name: StringType,
+    cost_centre_description: StringType,
+    cost_centre_analytical_code: StringType,
+    encounter_initiator_id: IntType,
+    encounter_start_date: StringType,
+    encounter_follow_up: StringType, 
+    encounter_claimed: IntType, 
+    encounter_open: IntType, 
+    encounter_signed_by: IntType,
+    encounter_signed_on: StringType,
+    encounter_triaged_on: StringType,
+    encounter_triaged_by: IntType,
+    encounter_scheme_id: IntType,
+    encounter_canceled: IntType, 
+    encounter_bill_line_id: IntType,
+    encounter_referral_id: IntType
   }
 };
 
